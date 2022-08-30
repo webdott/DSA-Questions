@@ -1,0 +1,82 @@
+/**
+     * desc: You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.
+
+    You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+
+
+    Example 1: =>
+    Input: l1 = [2,4,3], l2 = [5,6,4]
+    Output: [7,0,8]
+    Explanation: 342 + 465 = 807.
+    
+    Example 2: =>
+    Input: l1 = [0], l2 = [0]
+    Output: [0]
+    
+    Example 3: =>
+    Input: l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
+    Output: [8,9,9,9,0,0,0,1]
+
+    Constraints: =>
+    The number of nodes in each linked list is in the range [1, 100].
+    0 <= Node.val <= 9
+    It is guaranteed that the list represents a number that does not have leading zeros.
+ */
+
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     val: number
+ *     next: ListNode | null
+ *     constructor(val?: number, next?: ListNode | null) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.next = (next===undefined ? null : next)
+ *     }
+ * }
+ */
+
+class ListNode {
+	val: number;
+	next: ListNode | null;
+	constructor(val?: number, next?: ListNode | null) {
+		this.val = val === undefined ? 0 : val;
+		this.next = next === undefined ? null : next;
+	}
+}
+
+const addTwoNumbers = (
+	l1: ListNode | null,
+	l2: ListNode | null
+): ListNode | null => {
+	let arr: number[] = [];
+	let node: ListNode | null = null;
+	let traverse1Node: ListNode | null = l1;
+	let traverse2Node: ListNode | null = l2;
+	let remainder: number = 0;
+
+	// add elements of linked lists 1 and 2 if still elements in them. Do the sum and carry and continue adding. Push sum to arr and set remainder to carry;
+	while (traverse1Node !== null || traverse1Node !== null) {
+		const val =
+			((traverse1Node?.val ?? 0) + (traverse2Node?.val ?? 0) + remainder) % 10;
+		remainder = Math.floor(
+			((traverse1Node?.val ?? 0) + (traverse2Node?.val ?? 0) + remainder) / 10
+		);
+
+		node = new ListNode(val, node);
+		traverse1Node = traverse1Node?.next ?? null;
+		traverse2Node = traverse2Node?.next ?? null;
+	}
+
+	// if remainder is greater than 0, push it to arr.
+	if (remainder > 0) {
+		arr.push(remainder);
+	}
+
+	// Start from back of array to form a linkedlist
+	for (let i = arr.length - 1; i >= 0; i--) {
+		let temp = node;
+		node = new ListNode(arr[i], temp);
+	}
+
+	return node;
+};

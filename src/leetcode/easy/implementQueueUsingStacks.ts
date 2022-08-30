@@ -88,6 +88,3 @@ class MyQueue {
  * const param_7 = obj.pop();
  * const param_8 = obj.pop();
  */
-
-// 232
-// 844
