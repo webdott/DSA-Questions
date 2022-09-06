@@ -77,11 +77,11 @@ const verticalTraversal = (root: TreeNode | null): number[][] => {
 	// map column to row and value in Map
 	const dfs = (row: number, column: number, node: TreeNode | null) => {
 		if (node === null) return;
-                                                                              
+
 		hashTable.set(
 			column,
 			hashTable.get(column)
-				? [...hashTable.get(column), { row, val: node.val }]
+				? [...(hashTable.get(column) ?? []), { row, val: node.val }]
 				: [{ row, val: node.val }]
 		);
 		dfs(row + 1, column - 1, node.left);
