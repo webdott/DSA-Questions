@@ -290,6 +290,18 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
+"@datastructures-js/heap@^4.1.2":
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/@datastructures-js/heap/-/heap-4.1.2.tgz#85a525f5715d89f22ca3b6e5a88b444f8a4f07d7"
+  integrity sha512-Dl6MPPVXxzWsSQxIaV0sOpAx/B8r7RYUO5/GWe7GhG9v9P4QfZ1cgPSq+SoF0QJFhu9G9TmtPfRLHPWzL73GpQ==
+
+"@datastructures-js/priority-queue@^6.1.3":
+  version "6.1.3"
+  resolved "https://registry.yarnpkg.com/@datastructures-js/priority-queue/-/priority-queue-6.1.3.tgz#f814878e1d25409b25e75c212851cccd0a4b1986"
+  integrity sha512-zI0vOpxL0opXMpvLFS34Osw9ArM53Th5+GmNUB0zXwhQN5k8r9miNBrJYgTasAkW+WFtuzU++2dPhS1n4HDG2w==
+  dependencies:
+    "@datastructures-js/heap" "^4.1.2"
+
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@istanbuljs/load-nyc-config/-/load-nyc-config-1.1.0.tgz#fd3db1d59ecf7cf121e80650bb86712f9b55eced"
