@@ -48,3 +48,63 @@ const findClosestElements = (arr: number[], k: number, x: number): number[] => {
 
 	return result;
 };
+
+/**
+ *
+ * @param arr number[]
+ * @param k number
+ * @param x number
+ * @returns number[]
+ */
+const findClosestElementsBinarySearch = (
+	arr: number[],
+	k: number,
+	x: number
+): number[] => {
+	let closest: number = Infinity;
+	let closestMid: number = -1;
+
+	let p1: number = 0;
+	let p2: number = arr.length - 1;
+
+	// use binary search to find closest element to x
+	while (p1 <= p2) {
+		let mid: number = p1 + ~~((p2 - p1) / 2);
+		let currDiff: number = Math.abs(arr[mid] - x);
+
+		if (currDiff < closest || (currDiff === closest && mid < closestMid)) {
+			closest = currDiff;
+			closestMid = mid;
+		}
+
+		if (arr[mid] === x) break;
+
+		if (arr[mid] > x) {
+			p2 = mid - 1;
+		} else {
+			p1 = mid + 1;
+		}
+	}
+
+	// initialize two pointers and at closest element to x and keep moving left or right depending on what is closer to x until we have k elements
+    
+	p1 = closestMid;
+	p2 = closestMid;
+	let count: number = 1;
+
+	while (count < k) {
+		let left: number = p1 - 1 >= 0 ? Math.abs(arr[p1 - 1] - x) : Infinity;
+		let right: number =
+			p2 + 1 < arr.length ? Math.abs(arr[p2 + 1] - x) : Infinity;
+
+		if (left <= right) {
+			p1 -= 1;
+		} else {
+			p2 += 1;
+		}
+
+		count += 1;
+	}
+
+	return arr.slice(p1, p2 + 1);
+};
