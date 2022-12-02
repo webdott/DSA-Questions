@@ -23,44 +23,43 @@
     1 <= nums[i] <= 109
  */
 
-
 /**
- * 
+ *
  * @param nums number[]
  * @param k number
  * @returns boolean
  */
 const isPossibleDivide = (nums: number[], k: number): boolean => {
-    if(k === 1) return true;
+	if (k === 1) return true;
 
-    nums.sort((a, b) => a - b);
+	nums.sort((a, b) => a - b);
 
-    const numbers: Map<number, number> = new Map();
+	const numbers: Map<number, number> = new Map();
 
-    for (let num of nums) {
-        numbers.set(num, (numbers.get(num) ?? 0) + 1);
-    }
+	for (let num of nums) {
+		numbers.set(num, (numbers.get(num) ?? 0) + 1);
+	}
 
-    let prevValue: number = 0;
-    let currCount: number = 0;
+	let prevValue: number = 0;
+	let currCount: number = 0;
 
-    while(numbers.size) {
-        for (let [key, value] of numbers.entries()) {
-            if(prevValue === 0 || (prevValue > 0 && key === prevValue + 1)) {
-                currCount += 1;
-                value === 1 ? numbers.delete(key) : numbers.set(key, value - 1);
-                prevValue = key;
-            } else {
-                return false
-            }
+	while (numbers.size) {
+		for (let [key, value] of numbers.entries()) {
+			if (prevValue === 0 || (prevValue > 0 && key === prevValue + 1)) {
+				currCount += 1;
+				value === 1 ? numbers.delete(key) : numbers.set(key, value - 1);
+				prevValue = key;
+			} else {
+				return false;
+			}
 
-            if(currCount === k) {
-                prevValue = 0;
-                currCount = 0;
-                break;
-            };
-        }
-    }
+			if (currCount === k) {
+				prevValue = 0;
+				currCount = 0;
+				break;
+			}
+		}
+	}
 
-    return numbers.size === 0 && prevValue === 0;
+	return numbers.size === 0 && prevValue === 0;
 };
