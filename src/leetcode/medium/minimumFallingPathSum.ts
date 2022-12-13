@@ -24,7 +24,7 @@
  * @param matrix number[][]
  * @returns number
  */
-const minFallingPathSum = (matrix: number[][]): number => {
+const minFallingPathSumTopDown = (matrix: number[][]): number => {
 	const rowLength: number = matrix.length;
 	const memo: Map<string, number> = new Map();
 	const columnLength: number = matrix[0].length;
@@ -74,4 +74,18 @@ const minFallingPathSum = (matrix: number[][]): number => {
 	}
 
 	return minSum;
+};
+
+const minFallingPathSumBottomUp = (matrix: number[][]): number => {
+	for (let i = 1; i < matrix.length; i++) {
+		for (let j = 0; j < matrix[i].length; j++) {
+			matrix[i][j] += Math.min(
+				matrix[i - 1][j - 1] ?? Infinity,
+				matrix[i - 1][j] ?? Infinity,
+				matrix[i - 1][j + 1] ?? Infinity
+			);
+		}
+	}
+
+	return Math.min(...matrix[matrix.length - 1]);
 };
