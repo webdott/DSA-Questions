@@ -82,3 +82,73 @@ const numberOfGoodPathsTLE = (vals: number[], edges: number[][]): number => {
 
 	return ~~(res / 2) + vals.length;
 };
+
+const numberOfGoodPathsDSU = (vals: number[], edges: number[][]): number => {
+	let res: number = 0;
+
+	const adjList: Map<number, number[]> = new Map();
+	const valList: Map<number, number[]> = new Map();
+	const DSU: number[] = new Array(vals.length).fill(0).map((_, idx) => idx);
+
+	for (let i = 0; i < vals.length; i++) {
+		valList.set(vals[i], [...(valList.get(vals[i]) ?? []), i]);
+	}
+
+	const valListAsc = new Map(
+		[...valList.entries()].sort((a, b) => a[0] - b[0])
+	);
+
+	const find = (num: number): number => {
+		if (DSU[num] === num) {
+			return num;
+		} else {
+			return (DSU[num] = find(DSU[num]));
+		}
+	};
+
+	const combine = (num1: number, num2: number) => {
+		const u: number = find(num1);
+		const v: number = find(num2);
+
+		if (u !== v) {
+			if (u > v) {
+				DSU[v] = u;
+			} else {
+				DSU[u] = v;
+			}
+		}
+	};
+
+	for (let edge of edges) {
+		if (vals[edge[0]] > vals[edge[1]]) {
+			adjList.set(edge[0], [...(adjList.get(edge[0]) ?? []), edge[1]]);
+			adjList.set(edge[1], adjList.get(edge[1]) ?? []);
+		} else {
+			adjList.set(edge[0], adjList.get(edge[0]) ?? []);
+			adjList.set(edge[1], [...(adjList.get(edge[1]) ?? []), edge[0]]);
+		}
+	}
+
+	for (let [_, value] of valListAsc.entries()) {
+		for (let sameNode of value) {
+			for (let child of adjList.get(sameNode) ?? []) {
+				combine(sameNode, child);
+			}
+		}
+
+		const allNodes: Map<number, number> = new Map();
+
+		for (let sameNode of value) {
+			let parent: number = find(sameNode);
+			allNodes.set(parent, (allNodes.get(parent) ?? 0) + 1);
+		}
+
+		res += value.length;
+
+		for (let value of allNodes.values()) {
+			res += (value * (value - 1)) / 2;
+		}
+	}
+
+	return res;
+};
