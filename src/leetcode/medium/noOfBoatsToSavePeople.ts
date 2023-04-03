@@ -68,3 +68,40 @@ const numRescueBoats = (people: number[], limit: number): number => {
 
 	return res;
 };
+
+/**
+ *
+ * @param people number[]
+ * @param limit number
+ * @returns number
+ */
+const numRescueBoatsOptimizd = (people: number[], limit: number): number => {
+	// sort people array to get all people accordingly
+	people.sort((a, b) => a - b);
+
+	// initialize our left and right pointers.
+	let left: number = 0;
+	let right: number = people.length - 1;
+
+	let res: number = 0;
+
+	// using our two pointers, we determine if left and right pointers can add up to at most our limit, if yes, we take the two.
+	// If we can just take our right, we take only right person
+	// else we take the left person
+
+	// add 1 to each trip and return trip count after all iteration
+	while (left <= right) {
+		if (people[left] + people[right] <= limit) {
+			left += 1;
+			right -= 1;
+		} else if (people[right] <= limit) {
+			right -= 1;
+		} else {
+			left += 1;
+		}
+
+		res += 1;
+	}
+
+	return res;
+};
