@@ -22,52 +22,55 @@
 
 /**
  * Definition for a binary tree node.
- * function TreeNode(val) {
- *     this.val = val;
- *     this.left = this.right = this.parent = null;
- * }
  */
+
+function TreeNode(val) {
+	this.val = val;
+	this.left = this.right = this.parent = null;
+}
+
 /**
  * @param {TreeNode} root
  * @param {TreeNode} target
  * @param {number} k
  * @return {number[]}
  */
-const distanceK = function(root, target, k) {
-    const visited = new Set();
-    const ans = [];
-    let targetExtended = null;
+const distanceK = function (root, target, k) {
+	const visited = new Set();
+	const ans = [];
+	let targetExtended = null;
 
-    const addParent = (curr, parent) => {
-        if(curr === null) return;
+	const addParent = (curr, parent) => {
+		if (curr === null) return;
 
-        if(curr.val === target.val) targetExtended = curr;
-        curr.parent = parent;
+		if (curr.val === target.val) targetExtended = curr;
+		curr.parent = parent;
 
-        addParent(curr.left, curr);
-        addParent(curr.right, curr);
-    }
+		addParent(curr.left, curr);
+		addParent(curr.right, curr);
+	};
 
-    addParent(root, null);
+	addParent(root, null);
 
-    const dfs = (node, distance) => {
-        if(node === null || visited.has(node)) return;
+	const dfs = (node, distance) => {
+		if (node === null || visited.has(node)) return;
 
-        visited.add(node);
+		visited.add(node);
 
-        if(distance === k) {
-            ans.push(node.val);
-            return;
-        }
+		if (distance === k) {
+			// @ts-ignore
+			ans.push(node.val);
+			return;
+		}
 
-        distance += 1;
+		distance += 1;
 
-        dfs(node.left, distance);
-        dfs(node.right, distance);
-        dfs(node.parent, distance);
-    }
+		dfs(node.left, distance);
+		dfs(node.right, distance);
+		dfs(node.parent, distance);
+	};
 
-    dfs(targetExtended, 0);
+	dfs(targetExtended, 0);
 
-    return ans;
+	return ans;
 };
