@@ -68,3 +68,17 @@ const hasCycle = (head: ListNode | null): boolean => {
 
 	return false;
 };
+
+const hasCycleO1 = (head: ListNode | null): boolean => {
+    let slow = head;
+    let fast = head?.next;
+
+    while (fast?.next?.next) {
+        if(fast === slow) return true;
+
+        fast = fast.next.next;
+        slow = slow!.next;
+    }
+
+    return false;
+};
