@@ -48,6 +48,7 @@ const minCostConnectPoints = (points: number[][]): number => {
 	const lowestEdges: Record<number, number> = { 0: 0 };
 	let totalMST: number = 0;
 
+	//@ts-ignore
 	minPriorityQueue.enqueue(0, 0);
 
 	while (minPriorityQueue.size() > 0) {
