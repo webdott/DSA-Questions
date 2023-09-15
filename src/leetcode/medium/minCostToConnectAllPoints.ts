@@ -42,7 +42,7 @@ const getWeight = (pointA: number[], pointB: number[]): number => {
  * @param points number[][]
  * @returns number
  */
-const minCostConnectPoints = (points: number[][]): number => {
+const minCostConnectPointsPrim = (points: number[][]): number => {
 	const minPriorityQueue = new MinPriorityQueue();
 	const visited: Set<number> = new Set();
 	const lowestEdges: Record<number, number> = { 0: 0 };
@@ -80,6 +80,71 @@ const minCostConnectPoints = (points: number[][]): number => {
 			// @ts-ignore
 			minPriorityQueue.enqueue(i, distanceToPoint);
 		}
+	}
+
+	return totalMST;
+};
+
+class UnionFind {
+	private rank: number[];
+	private parent: number[];
+
+	constructor(size: number) {
+		this.rank = Array(size).fill(1);
+		this.parent = Array(size)
+			.fill(0)
+			.map((_, idx) => idx);
+	}
+
+	find(point: number): number {
+		if (this.parent[point] === point) return point;
+
+		return (this.parent[point] = this.find(this.parent[point]));
+	}
+
+	union(pointA: number, pointB: number) {
+		const parentA: number = this.find(pointA);
+		const parentB: number = this.find(pointB);
+
+		if (parentA === parentB) return;
+
+		if (this.rank[parentA] > this.rank[parentB]) {
+			this.rank[parentA] += this.rank[parentB];
+			this.parent[parentB] = parentA;
+		} else {
+			this.rank[parentB] += this.rank[parentA];
+			this.parent[parentA] = parentB;
+		}
+	}
+}
+
+const minCostConnectPointsKrusal = (points: number[][]): number => {
+	const uf = new UnionFind(points.length);
+	let totalMST: number = 0;
+	const edgesList: number[][] = [];
+
+	for (let i = 0; i < points.length; i++) {
+		for (let j = i + 1; j < points.length; j++) {
+			const weight: number = getWeight(points[i], points[j]);
+
+			edgesList.push([weight, i, j]);
+		}
+	}
+
+	let edgesSeen: number = 0;
+
+	edgesList.sort((a, b) => a[0] - b[0]);
+
+	for (let edge of edgesList) {
+		const [weight, u, v] = edge;
+
+		if (uf.find(u) === uf.find(v)) continue;
+
+		totalMST += weight;
+		uf.union(u, v);
+		edgesSeen += 1;
+
+		if (edgesSeen === points.length - 1) break;
 	}
 
 	return totalMST;
