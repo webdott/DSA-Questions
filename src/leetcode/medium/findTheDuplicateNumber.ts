@@ -47,3 +47,22 @@ const findDuplicate = (nums: number[]): number => {
 
 	return slowPointer;
 };
+
+/**
+ *
+ * @param nums number
+ * @returns number
+ */
+const findDuplicateNegativeMark = (nums: number[]): number => {
+	for (let i = 0; i < nums.length; i++) {
+		const idx = Math.abs(nums[i]);
+
+		if (nums[idx] < 0) {
+			return idx;
+		}
+
+		nums[idx] = -nums[idx];
+	}
+
+	return -1;
+};
