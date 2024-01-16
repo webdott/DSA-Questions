@@ -1,4 +1,3 @@
-
 # * desc: You are given an integer array matches where matches[i] = [winneri, loseri] indicates that the player winneri defeated player loseri in a match.
 
 # Return a list answer of size 2 where:
@@ -35,8 +34,9 @@
 # winneri != loseri
 # All matches[i] are unique.
 
+
 class Solution:
-    def findWinners(self, matches: List[List[int]]) -> List[List[int]]:
+    def findWinners(self, matches):
         res = [[], []]
 
         winners = set()
@@ -50,7 +50,7 @@ class Solution:
         for winner in winners:
             if winner not in losers:
                 res[0].append(winner)
-    
+
         for key, value in losers.items():
             if value == 1:
                 res[1].append(key)
