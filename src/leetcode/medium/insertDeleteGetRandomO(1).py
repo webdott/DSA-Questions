@@ -36,6 +36,7 @@ class RandomizedSet:
         self.main_set = {}
         self.rand_set = []
 
+    # O(1)
     def insert(self, val: int) -> bool:
         if val not in self.main_set:
             self.main_set[val] = len(self.rand_set)
@@ -44,6 +45,7 @@ class RandomizedSet:
 
         return False
 
+    # O(1)
     def remove(self, val: int) -> bool:
         if val in self.main_set:
             last_el = self.rand_set[-1]
@@ -60,6 +62,7 @@ class RandomizedSet:
 
         return False
 
+    # O(1)
     def getRandom(self) -> int:
         roullette_idx = int(random.random() * len(self.rand_set))
         return self.rand_set[roullette_idx]
