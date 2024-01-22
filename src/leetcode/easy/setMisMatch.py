@@ -16,7 +16,8 @@
 # 2 <= nums.length <= 104
 # 1 <= nums[i] <= 104
 
-
+# time -> O(n logn)
+# space -> O(1)
 class Solution:
     def findErrorNums(self, nums: List[int]) -> List[int]:
         nums.sort()
@@ -38,3 +39,24 @@ class Solution:
                 dup = nums[i]
 
         return [dup, num_missing]
+
+
+# time -> O(n)
+# space -> O(n)
+class Solution2:
+    def findErrorNums(self, nums: List[int]) -> List[int]:
+        dup_set = set()
+        all_idx = set(i + 1 for i in range(len(nums)))
+
+        dup = -1
+
+        for i in range(len(nums)):
+            if nums[i] in all_idx:
+                all_idx.remove(nums[i])
+
+            if nums[i] in dup_set:
+                dup = nums[i]
+            else:
+                dup_set.add(nums[i])
+
+        return [dup, list(all_idx)[0]]
