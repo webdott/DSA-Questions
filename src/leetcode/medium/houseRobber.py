@@ -45,3 +45,16 @@ class Solution(object):
         n = len(nums)
 
         return self.dp(0, n, nums)
+
+
+class SolutionBU(object):
+    def rob(self, nums):
+        n = len(nums)
+
+        dp = [0] * (n + 1)
+        dp[1] = nums[0]
+
+        for i in range(1, n):
+            dp[i + 1] = max(dp[i - 1] + nums[i], dp[i])
+
+        return dp[n]
