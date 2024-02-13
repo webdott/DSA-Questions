@@ -39,7 +39,7 @@ class Solution:
     def getCharIndex(self, char: str) -> int:
         return ord(char) - ord("a")
 
-    def helper(self, idx: int, arr: List[str], currList: List[int]):
+    def helper(self, idx: int, arr: list[str], currList: list[int]):
         def condition(x):
             return x == 1
 
@@ -60,13 +60,13 @@ class Solution:
                 newCurrList[listIdx] = 1
 
         # choose if there are no repeating characters in the current string
-        if choose == True:
+        if choose is True:
             self.helper(idx + 1, arr, newCurrList)
 
         # not choose
         self.helper(idx + 1, arr, currList)
 
-    def maxLength(self, arr: List[str]) -> int:
+    def maxLength(self, arr: list[str]) -> int:
         self.helper(0, arr, [0] * 26)
 
         return self.max_length

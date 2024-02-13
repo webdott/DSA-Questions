@@ -37,7 +37,7 @@ class Solution:
 
         return True
 
-    def firstPalindrome(self, words: List[str]) -> str:
+    def firstPalindrome(self, words: list[str]) -> str:
         for word in words:
             if self.isPalindrome(word):
                 return word

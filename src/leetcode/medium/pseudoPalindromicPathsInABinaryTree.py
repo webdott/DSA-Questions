@@ -22,6 +22,7 @@
 
 
 # Definition for a binary tree node.
+from typing import Optional
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -36,7 +37,7 @@ class Solution:
     def isLeafNode(Self, node: TreeNode) -> bool:
         return node.left is None and node.right is None
 
-    def isPseudoPalindrome(self, values: [int]) -> bool:
+    def isPseudoPalindrome(self, values: list[int]) -> bool:
         odds = 0
 
         # idea for pseudo palindromic path is that we have at most only one odd occuring number
@@ -49,7 +50,7 @@ class Solution:
 
         return True
 
-    def dfs(self, node: TreeNode, concatValues: [int]):
+    def dfs(self, node: TreeNode, concatValues: list[int]):
         concatValues[node.val - 1] += 1
 
         if self.isLeafNode(node):

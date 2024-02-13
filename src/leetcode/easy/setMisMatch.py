@@ -19,7 +19,7 @@
 # time -> O(n logn)
 # space -> O(1)
 class Solution:
-    def findErrorNums(self, nums: List[int]) -> List[int]:
+    def findErrorNums(self, nums: list[int]) -> list[int]:
         nums.sort()
 
         num_missing = 0
@@ -44,7 +44,7 @@ class Solution:
 # time -> O(n)
 # space -> O(n)
 class Solution2:
-    def findErrorNums(self, nums: List[int]) -> List[int]:
+    def findErrorNums(self, nums: list[int]) -> list[int]:
         dup_set = set()
         all_idx = set(i + 1 for i in range(len(nums)))
 

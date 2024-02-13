@@ -24,7 +24,7 @@ class Solution:
     def __init__(self):
         self.cache = []
 
-    def dp(self, row: int, col: int, rows: int, cols: int, mat: List[List[int]]) -> int:
+    def dp(self, row: int, col: int, rows: int, cols: int, mat: list[list[int]]) -> int:
         if col < 0 or col == cols:
             return math.inf
 
@@ -51,7 +51,7 @@ class Solution:
     def getNextSteps(self, row: int, col: int):
         return [[row + 1, col - 1], [row + 1, col], [row + 1, col + 1]]
 
-    def minFallingPathSum(self, matrix: List[List[int]]) -> int:
+    def minFallingPathSum(self, matrix: list[list[int]]) -> int:
         rows = len(matrix)
         cols = len(matrix[0])
         self.cache = [[None for i in range(cols)] for j in range(rows)]

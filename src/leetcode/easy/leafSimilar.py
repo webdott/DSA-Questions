@@ -7,7 +7,7 @@
 # Example 1: =>
 # Input: root1 = [3,5,1,6,2,9,8,null,null,7,4], root2 = [3,5,1,6,7,4,2,null,null,null,null,null,null,9,8]
 # Output: true
-    
+
 # Example 2: =>
 # Input: root1 = [1,2,3], root2 = [1,3,2]
 # Output: false
@@ -17,23 +17,28 @@
 # Both of the given trees will have values in the range [0, 200].
 
 # Definition for a binary tree node.
+
+from typing import Optional
+
+
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = left
         self.right = right
 
+
 class Solution:
     def isLeaf(self, node: TreeNode):
-        return node.left == None and node.right == None
+        return node.left is None and node.right is None
 
-    def bfs(self, node: Optional[TreeNode], leaves: List[int]):
+    def bfs(self, node: Optional[TreeNode], leaves: list[int]):
         if node:
             if self.isLeaf(node):
                 leaves.append(node.val)
 
             self.bfs(node.left, leaves)
-            self.bfs(node.right, leaves)     
+            self.bfs(node.right, leaves)
 
     def leafSimilar(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> bool:
         left, right = [], []

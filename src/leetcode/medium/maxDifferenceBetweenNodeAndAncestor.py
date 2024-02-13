@@ -21,17 +21,23 @@
 # 0 <= Node.val <= 105
 
 # Definition for a binary tree node.
+
+import math
+from typing import Optional
+
+
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = left
         self.right = right
-        
+
+
 class Solution:
     def getMaxDiff(self, root: Optional[TreeNode], max_val: int, min_val: int) -> int:
-        if root == None:
+        if root is None:
             return abs(max_val - min_val)
-        
+
         max_val = max(max_val, root.val)
         min_val = min(min_val, root.val)
 

@@ -33,7 +33,7 @@
 
 
 class Solution:
-    def evalRPN(self, tokens: List[str]) -> int:
+    def evalRPN(self, tokens: list[str]) -> int:
         stack = []
 
         def getTokens(stack: list[int]) -> [int, int]:

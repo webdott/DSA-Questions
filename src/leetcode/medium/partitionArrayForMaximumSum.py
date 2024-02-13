@@ -22,7 +22,7 @@
 
 
 class Solution:
-    def helper(self, start: int, dp: List[int], arr: List[int], k: int):
+    def helper(self, start: int, dp: list[int], arr: list[int], k: int):
         if start >= len(arr):
             return 0
 
@@ -42,5 +42,5 @@ class Solution:
         dp[start] = ans
         return ans
 
-    def maxSumAfterPartitioning(self, arr: List[int], k: int) -> int:
+    def maxSumAfterPartitioning(self, arr: list[int], k: int) -> int:
         return self.helper(0, [-1] * len(arr), arr, k)

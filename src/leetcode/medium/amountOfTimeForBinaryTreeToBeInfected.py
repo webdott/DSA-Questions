@@ -21,7 +21,7 @@
 # Input: root = [1], start = 1
 # Output: 0
 # Explanation: At minute 0, the only node in the tree is infected so we return 0.
- 
+
 # Constraints: =>
 # The number of nodes in the tree is in the range [1, 105].
 # 1 <= Node.val <= 105
@@ -30,15 +30,19 @@
 
 
 # Definition for a binary tree node.
+from typing import Optional
+
+
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = left
         self.right = right
 
+
 class Solution:
-    def isLeaf(self, node:TreeNode) -> bool:
-        return node.left == None and node.right == None
+    def isLeaf(self, node: TreeNode) -> bool:
+        return node.left is None and node.right is None
 
     def bfs(self, undir_graph: dict, start: int) -> int:
         time = 0
