@@ -37,3 +37,27 @@ class Solution:
                 return i
 
         return n
+
+
+class SolutionXor:
+    def missingNumber(self, nums: list[int]) -> int:
+        n = len(nums)
+        ans = 0
+
+        for num in nums:
+            ans ^= num
+        for i in range(1, n + 1):
+            ans ^= i
+
+        return ans
+
+
+class SolutionSum:
+    def missingNumber(self, nums: List[int]) -> int:
+        n = len(nums)
+        sum_nums = int((n * (n + 1)) / 2)
+
+        for num in nums:
+            sum_nums -= num
+
+        return sum_nums
