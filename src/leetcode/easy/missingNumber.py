@@ -53,7 +53,7 @@ class SolutionXor:
 
 
 class SolutionSum:
-    def missingNumber(self, nums: List[int]) -> int:
+    def missingNumber(self, nums: list[int]) -> int:
         n = len(nums)
         sum_nums = int((n * (n + 1)) / 2)
 
