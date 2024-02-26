@@ -1,10 +1,9 @@
-import { MinPriorityQueue } from "@datastructures-js/priority-queue";
+import { MinPriorityQueue } from '@datastructures-js/priority-queue';
 
 // TLE
 // function findCheapestPrice(n: number, flights: number[][], src: number, dst: number, k: number): number {
 //     const adjList: Map<number, number[][]> = new Map();
 //     const seen: Map<number, number> = new Map();
-
 
 //     for (let flight of flights) {
 //         const [from, to, price] = flight;
@@ -15,11 +14,11 @@ import { MinPriorityQueue } from "@datastructures-js/priority-queue";
 //     let price: number = Infinity;
 
 //     const checkMin = (currDest: number, remainingK: number, currPrice: number) => {
-//         if(remainingK < 0) return; 
+//         if(remainingK < 0) return;
 
 //         if(currDest === dst) {
 //             price = currPrice;
-//         } 
+//         }
 
 //         for (let nextDest of (adjList.get(currDest) ?? [])) {
 //             const newPrice: number = currPrice + nextDest[1];
@@ -59,11 +58,10 @@ const findCheapestPrice = function (n, flights, src, dst, K) {
 		if (city === dst) return cost;
 		if (stops <= 0 || !adjacencyList.has(city)) continue;
 		for (let [nextCity, nextCost] of adjacencyList.get(city)) {
-			if (visited.has(nextCity) && visited.get(nextCity) >= stops - 1)
-				continue;
+			if (visited.has(nextCity) && visited.get(nextCity) >= stops - 1) continue;
 			queue.enqueue([cost + nextCost, nextCity, stops - 1]);
 		}
 	}
-    
+
 	return -1;
 };
