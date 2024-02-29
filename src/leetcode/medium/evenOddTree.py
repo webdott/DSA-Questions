@@ -46,12 +46,16 @@ class TreeNode:
 
 class Solution:
     def isNodeInCorrectLevel(self, prev: int, level: int, node: TreeNode):
-        levelIsEven = level % 2 == 0
+        levelParity = level % 2
 
-        if levelIsEven:
-            return node.val % 2 != 0 and node.val > prev
+        # Compare the parity of current and level
+        if node.val % 2 == levelParity:
+            return False
+
+        if levelParity == 0:
+            return node.val > prev
         else:
-            return node.val % 2 == 0 and (True if prev == -1 else node.val < prev)
+            return True if prev == -1 else node.val < prev
 
     def isEvenOddTree(self, root: Optional[TreeNode]) -> bool:
         queue, level = [root], -1
