@@ -54,3 +54,22 @@ class Solution:
             curr_node = curr_node.next
 
         return dummy_node.next
+
+
+class SolutionOnePass:
+    def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        dummy_node = ListNode(-1)
+        dummy_node.next = head
+        fast = dummy_node
+        slow = dummy_node
+
+        for _ in range(n + 1):
+            fast = fast.next
+
+        while fast:
+            fast = fast.next
+            slow = slow.next
+
+        slow.next = slow.next.next
+
+        return dummy_node.next
