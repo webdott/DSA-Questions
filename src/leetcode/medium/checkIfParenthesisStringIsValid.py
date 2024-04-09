@@ -70,3 +70,25 @@ class Solution:
             return i >= len(stack)
         else:
             return True
+
+
+class Solution2:
+    def canBeValid(self, s: str, locked: str) -> bool:
+        if len(s) % 2 > 0:
+            return False
+
+        def isValid(s: str, locked: str, check: str):
+            count, wild = 0, 0
+
+            for i, char in enumerate(s):
+                if locked[i] == "1":
+                    count += 1 if char == check else -1
+
+                    if count + wild < 0:
+                        return False
+                else:
+                    wild += 1
+
+            return count <= wild
+
+        return isValid(s, locked, "(") and isValid(s[::-1], locked[::-1], ")")
