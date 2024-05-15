@@ -62,5 +62,3 @@ class Solution:
                     maxScore += pow(2, cols - 1 - j)
 
         return maxScore
-
-        return maxScore
