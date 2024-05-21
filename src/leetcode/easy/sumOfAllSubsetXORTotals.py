@@ -45,7 +45,7 @@ class Solution:
     def subsetXORSum(self, nums: list[int]) -> int:
         self.xor_sum = 0
 
-        def dfs(idx: int, nums: list[int], curr_sum: int):
+        def recurseXor(idx: int, nums: list[int], curr_sum: int):
             if idx == len(nums):
                 return
 
@@ -53,9 +53,9 @@ class Solution:
             self.xor_sum += xor_sum
 
             for i in range(idx + 1, len(nums)):
-                dfs(i, nums, xor_sum)
+                recurseXor(i, nums, xor_sum)
 
         for i in range(len(nums)):
-            dfs(i, nums, 0)
+            recurseXor(i, nums, 0)
 
         return self.xor_sum
