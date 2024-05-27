@@ -30,7 +30,7 @@
 
 class Solution:
     def specialArray(self, nums: list[int]) -> int:
-        for i in range(101):
+        for i in range(len(nums) + 1):
             x_elements = 0
 
             for num in nums:
