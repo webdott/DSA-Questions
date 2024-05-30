@@ -38,14 +38,11 @@ class Solution:
 
         all_triplets = 0
 
-        for i in range(n - 1):
-            for j in range(i + 1, n):
-                for k in range(j, n):
-                    a = self.getXorOfRange(prefix_sum, i, j - 1)
-                    b = self.getXorOfRange(prefix_sum, j, k)
+        for i in range(0, n - 1):
+            for k in range(i + 1, n):
+                x_sum = self.getXorOfRange(prefix_sum, i, k)
 
-                    if a == b:
-                        # print(i, j, k)
-                        all_triplets += 1
+                if x_sum == 0:
+                    all_triplets += k - i
 
         return all_triplets
