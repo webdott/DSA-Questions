@@ -19,9 +19,6 @@ class Trie:
     def getRoot(self, word: str):
         idx, curr = 0, self.tree
 
-        if word[idx] not in curr:
-            return word
-
         while idx < len(word):
             char = word[idx]
 
