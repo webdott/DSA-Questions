@@ -49,7 +49,7 @@ class Solution:
         if root.left:
             left_val = self.bstToGstUtil(root.left, root.val)
 
-        return max(left_val, right_val, root.val)
+        return left_val if root.left else root.val
 
     def bstToGst(self, root: TreeNode) -> TreeNode:
         self.bstToGstUtil(root, 0)
