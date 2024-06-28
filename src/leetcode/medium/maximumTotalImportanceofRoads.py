@@ -74,3 +74,24 @@ class Solution:
             ans += adj[p1] + adj[p2]
 
         return ans
+
+
+class Solution2:
+    def maximumImportance(self, n: int, roads: List[List[int]]) -> int:
+        adj = [0] * n
+
+        for road in roads:
+            [p1, p2] = road
+
+            adj[p1] += 1
+            adj[p2] += 1
+
+        heapq.heapify(adj)
+
+        ans, val = 0, 1
+
+        for i in range(n):
+            ans += val * heapq.heappop(adj)
+            val += 1
+
+        return ans
